@@ -9,18 +9,13 @@ import mlflow
 from mlflow.models import infer_signature
 import dagshub
 
-# Initialize DagsHub for experiment tracking
-dagshub.init(repo_owner='bhattpriyang', repo_name='mlops_project', mlflow=True)
-
-# Set the experiment name in MLflow
-
-mlflow.set_experiment("Experiment 4")
-
-# Set the tracking URI for MLflow to log the experiment in DagsHub
-mlflow.set_tracking_uri("https://dagshub.com/bhattpriyang/mlops_project.mlflow") 
+# Initialize DagsHub and set up MLflow experiment tracking
+dagshub.init(repo_owner='mohammedbismilla76', repo_name='mlops', mlflow=True)
+mlflow.set_experiment("Experiment3")  # Name of the experiment in MLflow
+mlflow.set_tracking_uri("https://dagshub.com/mohammedbismilla76/mlops.mlflow")  # URL to track the experiment
 
 # Load the dataset containing water potability information
-data = pd.read_csv("D:\\exp_track_mlflow1\\data\\water_potability.csv")
+data = pd.read_csv("data\water_potability.csv")
 
 # Split the dataset into training and test sets with an 80-20 split
 train_data, test_data = train_test_split(data, test_size=0.20, random_state=42)
@@ -119,3 +114,4 @@ with mlflow.start_run(run_name="Random Forest Tuning") as parent_run:
     print("Precision: ", precision)
     print("Recall: ", recall)
     print("F1-score: ", f1)
+ 
