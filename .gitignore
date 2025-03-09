@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 dv
+nsec
 env/
 build/
 develop-eggs/

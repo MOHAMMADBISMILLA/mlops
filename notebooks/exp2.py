@@ -4,26 +4,25 @@ import numpy as np
 import mlflow
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
-import seaborn as sns
 import mlflow.sklearn
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import pickle
 import dagshub
 from sklearn.model_selection import train_test_split
 
-# Initialize DagsHub integration and set the experiment for MLflow tracking
-dagshub.init(repo_owner='bhattpriyang', repo_name='mlops_project', mlflow=True)
-mlflow.set_experiment("Experiment 2")  # Set the experiment name
-mlflow.set_tracking_uri("https://dagshub.com/bhattpriyang/mlops_project.mlflow")   # Registry URI for model management
+# Initialize DagsHub and set up MLflow experiment tracking
+dagshub.init(repo_owner='mohammedbismilla76', repo_name='mlops', mlflow=True)
+mlflow.set_experiment("Experiment2")  # Name of the experiment in MLflow
+mlflow.set_tracking_uri("https://dagshub.com/mohammedbismilla76/mlops.mlflow")  # URL to track the experiment
+
 
 # Load the dataset from CSV file and split into training and testing sets
-data = pd.read_csv("D:/exp_track_mlflow1/data/water_potability.csv")
+data = pd.read_csv("data\water_potability.csv")
 train_data, test_data = train_test_split(data, test_size=0.20, random_state=42)
 
 # Define a function to fill missing values with the median value for each column
@@ -50,8 +49,7 @@ models = {
     "Random Forest": RandomForestClassifier(),
     "Support Vector Classifier": SVC(),
     "Decision Tree": DecisionTreeClassifier(),
-    "K-Nearest Neighbors": KNeighborsClassifier(),
-    "XG Boost": XGBClassifier()
+    "K-Nearest Neighbors": KNeighborsClassifier()
 }
 
 # Start a parent MLflow run to track the overall experiment
@@ -85,7 +83,6 @@ with mlflow.start_run(run_name="Water Potability Models Experiment"):
             # Generate and visualize the confusion matrix
             cm = confusion_matrix(y_test, y_pred)
             plt.figure(figsize=(5, 5))
-            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')  # Create a heatmap of the confusion matrix
             plt.xlabel("Predicted")
             plt.ylabel("Actual")
             plt.title(f"Confusion Matrix for {model_name}")

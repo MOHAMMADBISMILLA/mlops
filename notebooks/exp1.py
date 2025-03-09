@@ -4,17 +4,16 @@ import numpy as np
 import mlflow
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
-import seaborn as sns
 import mlflow.sklearn
 import dagshub
 
 # Initialize DagsHub and set up MLflow experiment tracking
-dagshub.init(repo_owner='bhattpriyang', repo_name='mlops_project', mlflow=True)
-mlflow.set_experiment("Experiment 1")  # Name of the experiment in MLflow
-mlflow.set_tracking_uri("https://dagshub.com/bhattpriyang/mlops_project.mlflow")  # URL to track the experiment
+dagshub.init(repo_owner='mohammedbismilla76', repo_name='mlops', mlflow=True)
+mlflow.set_experiment("Experiment1")  # Name of the experiment in MLflow
+mlflow.set_tracking_uri("https://dagshub.com/mohammedbismilla76/mlops.mlflow")  # URL to track the experiment
 
 # Load the dataset from a CSV file
-data = pd.read_csv("D:\exp_track_mlflow1\data\water_potability.csv")
+data = pd.read_csv("data\water_potability.csv")
 
 # Split the dataset into training and test sets (80% training, 20% testing)
 from sklearn.model_selection import train_test_split
@@ -83,7 +82,7 @@ with mlflow.start_run():
     # Generate a confusion matrix to visualize model performance
     cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(5, 5))
-    sns.heatmap(cm, annot=True)  # Visualize confusion matrix
+   
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
     plt.title("Confusion Matrix")
